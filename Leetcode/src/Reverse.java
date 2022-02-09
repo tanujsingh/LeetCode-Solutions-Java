@@ -6,8 +6,7 @@ public class Reverse {
 		// TODO Auto-generated method stub
 		Reverse r = new Reverse();
 		System.out.println(r.reverse(-123));
-		System.out.println(r.reverse(123));
-		System.out.println(r.reverse(Integer.MAX_VALUE));
+//		System.out.println(r.reverse(123));
 		
 	}
 	
@@ -22,9 +21,9 @@ public class Reverse {
 		
 		while(x != 0) {
 			int digit = x%10;
-			
-//			if(sign < 0 && res < (Integer.MIN_VALUE - digit)/10) return 0;
-//			if(sign > 0 && res > (Integer.MAX_VALUE - digit)/10) return 0;
+			System.out.println(digit);
+			if(sign < 0 && res < (Integer.MIN_VALUE - digit)/10) return 0;
+			if(sign > 0 && res > (Integer.MAX_VALUE - digit)/10) return 0;
 			
 			res = res *10 + digit;
 			x = x/10;
