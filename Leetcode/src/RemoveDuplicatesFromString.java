@@ -1,14 +1,7 @@
 
-public class RemoveDuplicates {
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
-		System.out.println(removeDuplicates("aaaaaaa"));
-		
-	}
+public class RemoveDuplicatesFromString {
 	
-	public static String removeDuplicates(String s) {	  
+	public String removeDuplicates(String s) {	  
         char[] output = s.toCharArray();
         int pos = 0;
         for(int i = 0; i < s.length(); i++) {
