@@ -18,27 +18,31 @@ class Solution {
         if(root == null) return 0;
         
         Deque<TreeNode> queue = new ArrayDeque<>();
+        LinkedList<Integer> queueIndex = new LinkedList<>();
         queue.add(root);
-        root.val = 0;
+        queueIndex.add(1);
         int size;
         int width = 1;
         while(!queue.isEmpty()){
             size = queue.size();
-            width = Math.max(width, queue.peekLast().val - queue.peekFirst().val + 1);
-            // System.out.println(queue.peekLast().val + " " + queue.peekFirst().val);
+            int start = 0;
+            int end = 0;
             for(int i = 0; i < size; i++){
-                root = queue.poll();
-                
-                if(root.left != null){
-                    root.left.val = 2 * root.val;
-                    queue.add(root.left);
+                TreeNode node = queue.poll();
+                int index = queueIndex.poll();
+                if(i == 0) start = index;
+                if(i == size - 1) end = index;
+                if(node.left != null){
+                    queueIndex.add(2 * index);
+                    queue.add(node.left);
                 }
-                if(root.right != null) {
-                    root.right.val = 2 * root.val + 1;
-                    queue.add(root.right);
+                if(node.right != null) {
+                    queueIndex.add(2 * index + 1);
+                    queue.add(node.right);
                 }
             }
             
+            width = Math.max(width, end - start + 1);
             
         }
         
