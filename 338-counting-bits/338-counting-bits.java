@@ -2,17 +2,18 @@ class Solution {
     public int[] countBits(int n) {
         int[] res = new int[n + 1];
         
-        for(int i = 0 ; i <= n; ++i){
-            int ones = 0;
-            int temp = i;
-            while (temp != 0){
-                ones += temp%2;
-                temp /= 2;
-            }
-            
-            res[i] = ones;
+        for(int i = 0; i <= n; ++i) {
+            res[i] = solve(i);
         }
         
         return res;
+    }
+    
+    private int solve(int n) {
+        if (n == 0) return 0;
+        if (n == 1) return 1;
+        
+        if (n % 2 == 0) return solve(n/2);
+        else return solve(n/2) + 1;
     }
 }
