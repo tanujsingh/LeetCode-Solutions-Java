@@ -1,13 +1,12 @@
 class Solution {
     public int numberOfArithmeticSlices(int[] nums) {
         int count = 0;
+        int[] dp = new int[nums.length];
         
-        for(int i = 0; i < nums.length - 2; ++i){
-            int diff = nums[i + 1] - nums[i];
-            for(int j = i + 2; j < nums.length; ++j){
-                if(nums[j] - nums[j - 1] == diff)
-                    count++;
-                else break;
+        for(int i = 2; i < nums.length; ++i){
+            if(nums[i - 1] - nums[i - 2] == nums[i] - nums[i - 1]){
+                dp[i] = 1 + dp[i - 1];
+                count += dp[i];
             }
         }
         
