@@ -1,9 +1,7 @@
-// Top-Down Approach
+// Bottom-up Approach
 class Solution {
-    Map<Integer, Integer> points = new HashMap<>();
-    Map<Integer, Integer> memo = new HashMap<>();
-    
     public int deleteAndEarn(int[] nums) {
+        Map<Integer, Integer> points = new HashMap<>();
         int maxNum = 0;
         
         for(int num : nums){
@@ -11,22 +9,13 @@ class Solution {
             maxNum = Math.max(maxNum, num);
         }
         
-        return maxPoints(maxNum);
-    }
-    
-    private int maxPoints(int num) {
-        if(num == 0)
-            return 0;
-        
-        if(num == 1)
-            return points.getOrDefault(1, 0);
-        
-        if(memo.containsKey(num))
-            return memo.get(num);
-        
-        int gain = points.getOrDefault(num, 0);
-        memo.put(num, Math.max(maxPoints(num - 1), maxPoints(num - 2) + gain));
-        
-        return memo.get(num);
+        int[] maxPoints = new int[maxNum + 1]; // 0 to maxNum;
+        maxPoints[1] = points.getOrDefault(1, 0);
+
+        for(int num = 2; num < maxPoints.length; num++) {
+            int gain = points.getOrDefault(num, 0);
+            maxPoints[num] = Math.max(maxPoints[num - 1], maxPoints[num - 2] + gain);
+        }
+        return maxPoints[maxNum];
     }
 }
