@@ -1,24 +1,18 @@
 class Solution {
+    int poured;
+    Double[][] memo;
     public double champagneTower(int poured, int query_row, int query_glass) {
-        if(poured == 0) return 0;
-        List<Double> prevRow = new ArrayList<Double>();
-        prevRow.add((double) poured);
-        
-        for(int i = 0; i < query_row; i++){
-            List<Double> currRow = new ArrayList<Double>();
-            double inEndGlass = Math.max(0.0,(prevRow.get(0) - 1.0) / 2.0);
-            currRow.add(inEndGlass);
-            
-            for(int j = 1; j < prevRow.size(); j++){
-                currRow.add(Math.max(0.0,(prevRow.get(j - 1) - 1.0) / 2.0) + Math.max(0.0,(prevRow.get(j) - 1.0) / 2.0));
-            }
-            
-            currRow.add(inEndGlass);
-            prevRow = currRow;
-            
-        }
-        
-        return Math.min(1, prevRow.get(query_glass));
-        
+        this.poured = poured;
+        this.memo = new Double[query_row+1][query_glass+1];
+        double ans = dp(query_row, query_glass);
+        return Math.min(1, ans);
+    }
+    
+    // dp(r, c) means the amount of champagne is poured into cup[r, c]
+    double dp(int r, int c) {
+        if (c < 0 || c > r) return 0; // Invalid position
+        if (r == 0 && c == 0) return poured; // Amount Champaign is poured into the top cup
+        if (memo[r][c] != null) return memo[r][c];
+        return memo[r][c] = Math.max(dp(r-1, c-1) - 1, 0) / 2 + Math.max(dp(r-1, c) - 1, 0) / 2;
     }
 }
