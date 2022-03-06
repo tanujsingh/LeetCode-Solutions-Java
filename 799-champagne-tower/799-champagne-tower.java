@@ -6,13 +6,14 @@ class Solution {
         
         for(int i = 0; i < query_row; i++){
             List<Double> currRow = new ArrayList<Double>();
-            currRow.add(Math.max(0.0,(prevRow.get(0) - 1.0) / 2.0));
+            double inEndGlass = Math.max(0.0,(prevRow.get(0) - 1.0) / 2.0);
+            currRow.add(inEndGlass);
             
             for(int j = 1; j < prevRow.size(); j++){
                 currRow.add(Math.max(0.0,(prevRow.get(j - 1) - 1.0) / 2.0) + Math.max(0.0,(prevRow.get(j) - 1.0) / 2.0));
             }
             
-            currRow.add((Math.max(0.0,prevRow.get(0) - 1.0) / 2.0));
+            currRow.add(inEndGlass);
             prevRow = currRow;
             
         }
