@@ -7,12 +7,10 @@ class Solution {
         
         while(right < s.length()) {
             if(!set.contains(s.charAt(right))) {
-                set.add(s.charAt(right));
-                right++;
+                set.add(s.charAt(right++));
                 result = Math.max(result, right - left);
             } else {
-                set.remove(s.charAt(left));
-                left++;
+                set.remove(s.charAt(left++));
             }
             
             
