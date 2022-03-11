@@ -1,15 +1,11 @@
 class Solution {
     public int missingNumber(int[] nums) {
-        Set<Integer> set = new HashSet<>();
         int n = nums.length;
+        int nDigitSum = n*(n + 1)/2;
+        int sum = 0;
         for(int i = 0; i < n; ++i) {
-            set.add(nums[i]);
+            sum += nums[i];
         }
-        for(int i = 0; i <= n; ++i) {
-            if(!set.contains(i)) {
-                return i;
-            }
-        }
-        return -1;
+        return nDigitSum - sum;
     }
 }
