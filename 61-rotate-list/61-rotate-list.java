@@ -19,13 +19,11 @@ class Solution {
         }
         curr.next = head;
         k = k%length;
-        ListNode tempHead = new ListNode(0);
-        tempHead.next = head;
         for(int i = 0; i < length - k; ++i) {
-            tempHead = tempHead.next;
+            curr = curr.next;
         }
-        head = tempHead.next;
-        tempHead.next = null;
+        head = curr.next;
+        curr.next = null;
         return head;
     }
 }
