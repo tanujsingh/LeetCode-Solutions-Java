@@ -20,33 +20,16 @@ class Solution {
             return null;
         }
         
-        Node oldNode = head;
-        Node newNode = new Node(head.val, null, null);
-        visited.put(oldNode, newNode);
-        
-        while(oldNode != null) {
-            newNode.next = copiedNode(oldNode.next);
-            newNode.random = copiedNode(oldNode.random);
-            
-            oldNode = oldNode.next;
-            newNode = newNode.next;
+        if(visited.containsKey(head)) {
+            return visited.get(head);
         }
+        
+        Node newNode = new Node(head.val, null, null);
+        visited.put(head, newNode);
+        
+        newNode.next = copyRandomList(head.next);
+        newNode.random = copyRandomList(head.random);
         
         return visited.get(head);
-    }
-    
-    private Node copiedNode(Node node) {
-        if(node == null) {
-            return null;
-        }
-        
-        if(visited.containsKey(node)) {
-            return visited.get(node);
-        }
-        
-        Node newNode = new Node(node.val, null, null);
-        visited.put(node, newNode);
-        
-        return visited.get(node);
     }
 }
