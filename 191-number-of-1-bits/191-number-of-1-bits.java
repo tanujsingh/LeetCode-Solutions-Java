@@ -1,12 +1,15 @@
 public class Solution {
     // you need to treat n as an unsigned value
     public int hammingWeight(int n) {
-        int count = 0;
-        for(int i = 0; i < 32; i++){
-            if((n & 1) == 1)
-                count++;
-            n >>= 1;
+        int ones = 0;
+        int leastBit = 0;
+        while(leastBit < 32) {
+            if((n & 1) == 1) {
+                ones++;
+            }
+            n = n >> 1;
+            leastBit++;
         }
-        return count;
+        return ones;
     }
 }
