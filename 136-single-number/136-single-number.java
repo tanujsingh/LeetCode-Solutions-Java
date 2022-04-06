@@ -1,10 +1,18 @@
 class Solution {
     public int singleNumber(int[] nums) {
-        int xor = 0;
+        HashSet<Integer> set = new HashSet();
+        int sumNum = 0;
+        int sumArr = 0;
         
         for(int num : nums) {
-            xor ^= num;
+            set.add(num);
+            sumArr += num;
         }
-        return xor;
+        
+        for(int num : set) {
+            sumNum += num;
+        }
+        
+        return 2*sumNum - sumArr;
     }
 }
