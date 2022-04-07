@@ -3,7 +3,7 @@ class Solution {
         PriorityQueue<Integer> maxHeap = new PriorityQueue<>((a,b) -> b - a);
         
         for(int stone : stones) {
-            maxHeap.offer(stone);
+            maxHeap.add(stone);
         }
         
         int x, y;
@@ -11,7 +11,7 @@ class Solution {
             x = maxHeap.poll();
             y = maxHeap.poll();
             if(x > y) {
-                maxHeap.offer(x - y);
+                maxHeap.add(x - y);
             }
         }
         
