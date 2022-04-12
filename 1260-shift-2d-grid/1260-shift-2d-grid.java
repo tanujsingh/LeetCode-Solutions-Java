@@ -7,11 +7,10 @@ class Solution {
             result.add(new ArrayList());
 
         k %= (rows * col);
-        int dimension = rows * col;
-        int begin = dimension - k;
+        int begin = (rows * col) - k;
 
         int x = 0;
-        for (int i = begin; i < begin + dimension; i++) {
+        for (int i = begin; i < begin + (rows * col); i++) {
             int r = (i / col) % rows, c = i % col;
             result.get(x / col).add(grid[r][c]);
             x++;
