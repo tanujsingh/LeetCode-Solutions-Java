@@ -1,23 +1,20 @@
 class Solution {
+    int count = 0;
     public int countSubstrings(String s) {
-        int ans = 0;
-        
-        for (int start = 0; start < s.length(); ++start) {
-            for(int end = start; end < s.length(); ++end) {
-                ans += isPalindrome(s, start, end) ? 1 : 0;
-            }
+        for (int i = 0; i < s.length(); ++i) {
+            extendPalindrome(s, i, i);
+            extendPalindrome(s, i, i + 1);
         }
-        return ans;
+        return count;
     }
-    
-    private boolean isPalindrome(String s, int start, int end) {
-        while (start < end) {
-            if (s.charAt(start) != s.charAt(end)) {
-                return false;
+    private void extendPalindrome(String s, int left, int right) {
+        while (left >= 0 && right < s.length()) {
+            if (s.charAt(left) != s.charAt(right)) {
+                return;   
             }
-            start++;
-            end--;
+            count++;
+            left--;
+            right++;    
         }
-        return true;
     }
 }
