@@ -3,9 +3,10 @@ class Solution {
         int maxSum = Integer.MIN_VALUE;
         int localSum = 0;
         for(int num : nums) {
-            localSum = Math.max(num, localSum + num);
-            if (localSum > maxSum) {
-                maxSum = localSum;
+            localSum += num;
+            maxSum = Math.max(maxSum, localSum);
+            if (localSum < 0) {
+                localSum = 0;
             }
         }
         
