@@ -4,9 +4,9 @@ class Solution {
         StringBuilder sb = new StringBuilder();
         
         for(String str : strArr) {
-            String revStr = reverse(str);
-            sb.append(revStr + " ");
+            sb.append(reverse(str) + " ");
         }
+        
         return sb.toString().trim();
     }
     
