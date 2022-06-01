@@ -1,29 +1,27 @@
 class Solution {
     public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
-        int color = image[sr][sc];
+        int m = image.length;
+        int n = image[0].length;
+        boolean[][] visited = new boolean[m][n];
         
-        if(color != newColor) {
-            dfs(image, sr, sc, color, newColor);
-        }
+        int baseColor = image[sr][sc];
+        
+        dfs(image, sr, sc, baseColor, newColor, visited);
         
         return image;
     }
     
-    private void dfs(int[][] image, int r, int c, int color, int newColor) {
-        if (image[r][c] == color) {
-            image[r][c] = newColor;    
-            if(r >= 1) {
-                dfs(image, r - 1, c, color, newColor);
-            }
-            if(c >= 1) {
-                dfs(image, r, c - 1, color, newColor);
-            }
-            if(r < image.length - 1) {
-                dfs(image, r + 1, c, color, newColor);
-            }
-            if(c < image[0].length - 1) {
-                dfs(image, r, c + 1, color, newColor);
-            }
+    private void dfs(int[][] image, int r, int c, int baseColor, int newColor, boolean[][] visited) {
+        if(r < 0 || c < 0 || r >= image.length || c >= image[0].length || image[r][c] != baseColor || visited[r][c]) {
+            return;
         }
+        
+        visited[r][c] = true;
+        
+        image[r][c] = newColor;
+        dfs(image, r + 1, c, baseColor, newColor, visited);
+        dfs(image, r, c + 1, baseColor, newColor, visited);
+        dfs(image, r - 1, c, baseColor, newColor, visited);
+        dfs(image, r, c - 1, baseColor, newColor, visited);
     }
 }
