@@ -5,6 +5,6 @@ class Solution {
             return false;
         }
         
-        return (x & x - 1) == 0;
+        return (x & -x) == x;
     }
 }
