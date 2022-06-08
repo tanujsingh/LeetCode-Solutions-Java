@@ -15,22 +15,16 @@ class Solution {
         }
         
         int smallestNum = left;
-        
+        int rotation = left;
         left = 0;
         right = n - 1;
         
-        if(nums[smallestNum] <= target && nums[right] >= target) {
-            left = smallestNum;
-        } else {
-            right = smallestNum;
-        }
-        
         while(left <= right) {
             int mid = left + (right - left)/2;
-            
-            if(nums[mid] == target) {
-                return mid;
-            } else if (nums[mid] < target) {
+            int newMid = (mid + rotation)%n; 
+            if(nums[newMid] == target) {
+                return newMid;
+            } else if (nums[newMid] < target) {
                 left = mid + 1;
             } else {
                 right = mid - 1;
