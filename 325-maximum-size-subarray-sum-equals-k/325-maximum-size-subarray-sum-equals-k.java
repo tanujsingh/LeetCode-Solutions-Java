@@ -5,7 +5,9 @@ class Solution {
        int currSum = 0, maxLen = 0;
        for(int i = 0; i < nums.length; ++i) {
            currSum += nums[i];
-           maxLen = Math.max(maxLen, i - map.getOrDefault(currSum - k, i));
+           if(map.containsKey(currSum - k)) {
+               maxLen = Math.max(maxLen, i - map.get(currSum - k));
+           }
            map.putIfAbsent(currSum, i);
        }
         return maxLen;
