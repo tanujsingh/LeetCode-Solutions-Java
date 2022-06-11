@@ -1,28 +1,31 @@
 class Solution {
     public int minOperations(int[] nums, int x) {
-        int sumArr = 0, curSum = 0;
-        Map<Integer, Integer> memo = new HashMap<>();
-        memo.put(0,-1);
+        int maxWindow = -1;
+        int left = 0;
+        int right = 0;
+        int sumArr = 0;
+        int currSum = 0;
         
-        for (int num: nums) {
-          sumArr += num;  
-        } 
-
-        if (sumArr == x) {
+        for(int num : nums) {
+            sumArr += num;
+        }
+        
+        if(sumArr == x) {
             return nums.length;
         }
         
-        int target = sumArr - x, maxWindow = 0;
-
-        for (int i = 0; i < nums.length; ++i){
-            curSum += nums[i];
+        while (left <= right && right < nums.length) {
+            currSum += nums[right++];
             
-            memo.put(curSum,i);
+            while (left <= right && currSum > sumArr - x) {
+                currSum -= nums[left++];
+            }
             
-            if (memo.containsKey(curSum - target))
-                maxWindow = Math.max(maxWindow, i-memo.get(curSum - target));
+            if(currSum == sumArr - x) {
+                maxWindow = Math.max(maxWindow, right - left);
+            }
         }
         
-        return maxWindow > 0 ? (nums.length - maxWindow) : -1;
+        return maxWindow == -1 ? -1 : nums.length - maxWindow;
     }
 }
