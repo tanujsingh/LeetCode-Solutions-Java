@@ -1,18 +1,28 @@
 class Solution {
     public int minOperations(int[] nums, int x) {
-        int sumNums = 0, curs = 0;
-        for (int n: nums) sumNums += n;
+        int sumArr = 0, curSum = 0;
         Map<Integer, Integer> memo = new HashMap<>();
         memo.put(0,-1);
-        if (sumNums == x) return nums.length;
-        int target = sumNums - x, maxWindowSize = 0;
-        for (int i = 0; i<nums.length; i++){
-            curs += nums[i];
-            memo.put(curs,i);
-            if (memo.containsKey(curs - target))
-                maxWindowSize = Math.max(maxWindowSize, i-memo.get(curs - target));
+        
+        for (int num: nums) {
+          sumArr += num;  
+        } 
+
+        if (sumArr == x) {
+            return nums.length;
         }
         
-        return maxWindowSize>0?(nums.length-maxWindowSize):-1;
+        int target = sumArr - x, maxWindow = 0;
+
+        for (int i = 0; i < nums.length; ++i){
+            curSum += nums[i];
+            
+            memo.put(curSum,i);
+            
+            if (memo.containsKey(curSum - target))
+                maxWindow = Math.max(maxWindow, i-memo.get(curSum - target));
+        }
+        
+        return maxWindow > 0 ? (nums.length - maxWindow) : -1;
     }
 }
