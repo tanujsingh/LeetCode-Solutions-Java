@@ -6,15 +6,15 @@ class Solution {
             totalSum += num;
         }
         
-        int localSum = 0;
+        int localMaxSum = 0;
         int maxSum = Integer.MIN_VALUE;
         
         for(int num : nums) {
-            localSum += num;
-            maxSum = Math.max(maxSum, localSum);
+            localMaxSum += num;
+            maxSum = Math.max(maxSum, localMaxSum);
             
-            if(localSum < 0) {
-                localSum = 0;
+            if(localMaxSum < 0) {
+                localMaxSum = 0;
             }
         }
         
