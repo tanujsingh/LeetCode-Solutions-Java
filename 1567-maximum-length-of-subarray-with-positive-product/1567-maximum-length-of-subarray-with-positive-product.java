@@ -10,9 +10,9 @@ class Solution {
                 posNum++;
                 negNum = negNum == 0 ? 0 : negNum + 1;
             } else {
-                int temp = posNum;
+                int temp = posNum + 1;
                 posNum = negNum == 0 ? 0 : negNum + 1;
-                negNum = temp + 1;
+                negNum = temp;
             }
             
             ans = Math.max(ans, posNum);
