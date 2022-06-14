@@ -1,31 +1,23 @@
 class Solution {
     public int getMaxLen(int[] nums) {
-        int negIndex = -1;
-        int zeroIndex = -1;
-        int negSum = 0;
-        int len = 0;
+        int posNum = 0, negNum = 0;
+        int ans = 0;
         for(int i = 0; i < nums.length; ++i) {
-            if(nums[i] < 0) {
-                negSum++;
-                
-                if(negIndex == -1) {
-                    negIndex = i;
-                }
-            }
-            
             if(nums[i] == 0) {
-                negSum = 0;
-                negIndex = -1;
-                zeroIndex = i;
-            } 
-            
-            if(negSum%2 == 0) {
-                len = Math.max(i - zeroIndex, len);
+                posNum = 0;
+                negNum = 0;
+            } else if (nums[i] > 0) {
+                posNum++;
+                negNum = negNum == 0 ? 0 : negNum + 1;
             } else {
-                len = Math.max(i - negIndex, len);
+                int temp = posNum;
+                posNum = negNum == 0 ? 0 : negNum + 1;
+                negNum = temp + 1;
             }
+            
+            ans = Math.max(ans, posNum);
         }
         
-        return len;
+        return ans;
     }
 }
