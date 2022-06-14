@@ -17,12 +17,12 @@ class Solution {
                 negSum = 0;
                 negIndex = -1;
                 zeroIndex = i;
+            } 
+            
+            if(negSum%2 == 0) {
+                len = Math.max(i - zeroIndex, len);
             } else {
-                if(negSum%2 == 0) {
-                    len = Math.max(i - zeroIndex, len);
-                } else {
-                    len = Math.max(i - negIndex, len);
-                }
+                len = Math.max(i - negIndex, len);
             }
         }
         
