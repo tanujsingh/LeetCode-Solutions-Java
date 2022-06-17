@@ -15,22 +15,9 @@
  */
 class Solution {
     public boolean isUnivalTree(TreeNode root) {
-        if(root.left != null) {
-            if(!isUnivalTree(root.left)) {
-                return false;
-            }
-            if(root.left.val != root.val){
-                return false;
-            }
-        }
-          if(root.right != null) {
-            if(!isUnivalTree(root.right)) {
-                return false;
-            }
-            if(root.right.val != root.val){
-                return false;
-            }
-        }
-        return true;
+        if(root == null) return true;
+        if(root.left != null && root.left.val != root.val) return false;
+        if(root.right != null && root.right.val != root.val) return false;
+        return isUnivalTree(root.left) && isUnivalTree(root.right);
     }
 }
