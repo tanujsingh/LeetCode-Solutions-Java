@@ -1,16 +1,8 @@
-class Solution(object):
-    def twoSum(self, nums, target):
-        """
-        :type nums: List[int]
-        :type target: int
-        :rtype: List[int]
-        """
-        dictionary = dict()
-        pos = 0
-        while pos < len(nums):
-            if(target - nums[pos]) not in dictionary:
-                dictionary[nums[pos]] = pos
-                pos += 1
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        map = {}
+        for i in range(len(nums)):
+            if nums[i] in map:
+                return [i, map[nums[i]]]
             else:
-                return [dictionary[target - nums[pos]], pos]
-                
+                map[target - nums[i]] = i
