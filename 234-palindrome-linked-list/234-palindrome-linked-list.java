@@ -28,19 +28,20 @@ class Solution {
             ptr1 = ptr1.next;
             ptr2 = ptr2.next;
         }
+        
         return true;
     }
     
-    private ListNode reverseList(ListNode node) {
-        ListNode curr = node;
+    private ListNode reverseList(ListNode head) {
+        ListNode curr = head;
         ListNode prev = null;
-        
         while(curr != null) {
             ListNode temp = curr.next;
             curr.next = prev;
             prev = curr;
             curr = temp;
         }
+        
         return prev;
     }
 }
