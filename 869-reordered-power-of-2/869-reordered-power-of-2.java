@@ -1,15 +1,15 @@
 class Solution {
     public boolean reorderedPowerOf2(int n) {
-        int[] sum = sumDigits(n);
+        int[] count = countDigits(n);
         
         for(int i = 0; i < 32; ++i) {
-            if(Arrays.equals(sum, sumDigits(1 << i))) return true;
+            if(Arrays.equals(count, countDigits(1 << i))) return true;
         }
         
         return false;
     }
     
-    private int[] sumDigits(int n) {
+    private int[] countDigits(int n) {
         int[] res = new int[10];
         
         while(n > 0) {
