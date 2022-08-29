@@ -3,13 +3,7 @@ class Solution {
         int left = 0;
         int right = nums.length - 1;
         
-        if(right == 0) {
-            return nums[0];
-        }
-        
-        if(nums[left] < nums[right]) {
-            return nums[left];
-        }
+        if(left == right || nums[left] < nums[right]) return nums[left];     
         
         while(left <= right) {
             int mid = left + (right - left)/2;
@@ -22,12 +16,14 @@ class Solution {
                 return nums[mid];
             }
             
+            
             if(nums[mid] > nums[0]) {
                 left = mid + 1;
             } else {
                 right = mid - 1;
             }
         }
+        
         return -1;
     }
 }
