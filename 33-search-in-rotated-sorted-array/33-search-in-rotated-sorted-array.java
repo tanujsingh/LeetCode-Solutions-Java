@@ -14,7 +14,6 @@ class Solution {
             }
         }
         
-        int smallestNum = left;
         int rotation = left;
         left = 0;
         right = n - 1;
