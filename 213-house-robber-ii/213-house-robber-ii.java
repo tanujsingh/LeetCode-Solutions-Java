@@ -1,26 +1,28 @@
 class Solution {
     public int rob(int[] nums) {
-        int n = nums.length;
-        if(n == 1) return nums[0];
-        if(n == 2) return Math.max(nums[0], nums[1]);
+      if (nums.length == 1) 
+          return nums[0];
         
-        int maxFirst = helper(nums, 0, nums.length - 1);
-        int maxLast = helper(nums, 1, nums.length);
-        
-        return Math.max(maxFirst, maxLast);
+      return Math.max(rob0(nums), rob1(nums));
     }
     
-     private int helper(int[] nums, int begin, int end) {
-        int n = end - begin;
-        int[] dp = new int[n];
-        dp[0] = nums[begin];
-        dp[1] = Math.max(dp[0], nums[begin + 1]);
-        
-        for(int i = begin + 2; i < end; ++i) {
-            dp[i - begin] = Math.max(dp[i - begin - 1],
-                                     nums[i] + dp[i - begin - 2]);
-        }
-                
-        return dp[n - 1];
+    public int rob0(int[] nums){
+      int preMax = 0, curMax = 0;
+      for(int i = 0; i < nums.length - 1; i++){
+        int t = curMax;
+        curMax = Math.max(preMax + nums[i], curMax);
+        preMax = t;  
+      }  
+      return curMax;
+    }
+    
+    public int rob1(int[] nums){
+      int preMax = 0, curMax = 0;
+      for(int i = 1; i < nums.length; i++){
+        int t = curMax;
+        curMax = Math.max(preMax + nums[i], curMax);
+        preMax = t;  
+      }  
+      return curMax;  
     }
 }
