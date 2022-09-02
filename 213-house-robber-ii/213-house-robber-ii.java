@@ -2,27 +2,23 @@ class Solution {
     public int rob(int[] nums) {
       if (nums.length == 1) 
           return nums[0];
+       int include_1st = nums[0] + helper(nums, 2, nums.length - 2);
+       int exclude_1st = helper(nums, 1, nums.length - 1);
         
-      return Math.max(rob0(nums), rob1(nums));
+       return Math.max(include_1st, exclude_1st);
     }
     
-    public int rob0(int[] nums){
-      int preMax = 0, curMax = 0;
-      for(int i = 0; i < nums.length - 1; i++){
-        int t = curMax;
-        curMax = Math.max(preMax + nums[i], curMax);
-        preMax = t;  
-      }  
-      return curMax;
-    }
-    
-    public int rob1(int[] nums){
-      int preMax = 0, curMax = 0;
-      for(int i = 1; i < nums.length; i++){
-        int t = curMax;
-        curMax = Math.max(preMax + nums[i], curMax);
-        preMax = t;  
-      }  
-      return curMax;  
+    private int helper(int[] nums, int start, int end) {
+        int prev_last2 = 0;
+        int prev_last1 = 0;
+        
+        for(int i = start; i <= end; ++i) {
+            int curr = Math.max(prev_last1, prev_last2 + nums[i]);
+            int temp = prev_last1;
+            prev_last1 = curr;
+            prev_last2 = temp;
+        }
+        
+        return prev_last1;
     }
 }
