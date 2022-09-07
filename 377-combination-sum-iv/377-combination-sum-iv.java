@@ -1,8 +1,7 @@
 class Solution {
     private Map<Integer, Integer> memo = new HashMap<>(); 
     public int combinationSum4(int[] nums, int target) {
-        // Arrays.sort(nums);
-        
+        Arrays.sort(nums);
         return totalCombinations(nums, target);
     }
     
