@@ -1,27 +1,15 @@
 class Solution {
-    private Map<Integer, Integer> memo = new HashMap<>(); 
     public int combinationSum4(int[] nums, int target) {
-        return totalCombinations(nums, target);
-    }
-    
-    private int totalCombinations(int[] nums, int remain) {
-        if(remain == 0) {
-            return 1;
-        }
+        int[] dp = new int[target + 1];
+        dp[0] = 1;
         
-        if(memo.containsKey(remain)) {
-            return memo.get(remain);
-        }
-        
-        int ans = 0;
-        for(int num : nums) {
-            if(remain - num >= 0) {
-                ans += totalCombinations(nums, remain - num);
+        for(int i = 1; i <= target; ++i) {
+            for(int num : nums) {
+                if(i - num >= 0) {
+                    dp[i] += dp[i - num];
+                }
             }
         }
-        
-        memo.put(remain, ans);
-        
-        return ans;
+        return dp[target];
     }
 }
