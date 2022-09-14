@@ -3,16 +3,10 @@ class Solution {
        if(moves.length() < 2)
            return false;
         
-        Stack<Character> stack = new Stack<>();
         int sumHorizontal = 0;
         int sumVertical = 0;
         
-        for(char ch : moves.toCharArray()) 
-            stack.add(ch);
-        
-        while(!stack.isEmpty()) {
-            char ch = stack.pop();
-            
+        for(char ch : moves.toCharArray()) {
             if(ch == 'L' || ch == 'R'){
                 if(ch == 'R')
                     sumHorizontal += 1;
