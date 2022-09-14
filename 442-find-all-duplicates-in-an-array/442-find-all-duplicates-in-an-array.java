@@ -3,8 +3,8 @@ class Solution {
         List<Integer> list = new ArrayList<>();
         
         for(int num : nums) {
-            int idx = Math.abs(num);
-            nums[idx - 1] *= -1;
+            int idx = num < 0 ? -1 * num : num;
+            nums[idx - 1] *= -1; 
             if(nums[idx - 1] > 0)
                 list.add(idx);
         }
