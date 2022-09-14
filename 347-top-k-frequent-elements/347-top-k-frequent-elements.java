@@ -15,8 +15,9 @@ class Solution {
             }
         }
         
-        for(int i = 0; i < k; i++) {
-            result[i] = minHeap.poll();
+       int i = 0; 
+       while(!minHeap.isEmpty()) {
+            result[i++] = minHeap.poll();
         }
         
         return result;
