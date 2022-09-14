@@ -7,14 +7,13 @@ class Solution {
         }
         
         int left = 0;
-        int right = 0;
+        int right = slidingWindowRange;
         int maxOnesInRange = 0;
         int currOnesInRange = 0;
         
         for(int i = 0; i < slidingWindowRange; ++i) {
             currOnesInRange += data[i];
             maxOnesInRange = Math.max(maxOnesInRange, currOnesInRange);
-            right++;
         }
         
         while(right != data.length) {
