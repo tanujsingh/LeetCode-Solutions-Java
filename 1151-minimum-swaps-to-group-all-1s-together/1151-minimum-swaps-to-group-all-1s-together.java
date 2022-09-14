@@ -18,8 +18,7 @@ class Solution {
         }
         
         while(right != data.length) {
-            currOnesInRange += data[right++];
-            currOnesInRange -= data[left++];
+            currOnesInRange += data[right++] - data[left++];
             maxOnesInRange = Math.max(maxOnesInRange, currOnesInRange);
         }
         
