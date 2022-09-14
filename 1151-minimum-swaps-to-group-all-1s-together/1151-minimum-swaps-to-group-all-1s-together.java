@@ -6,9 +6,6 @@ class Solution {
             slidingWindowRange += item;
         }
         
-        if(slidingWindowRange == 1)
-            return 0;
-        
         int left = 0;
         int right = 0;
         int maxOnesInRange = 0;
