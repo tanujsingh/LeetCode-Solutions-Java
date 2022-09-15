@@ -48,22 +48,4 @@ class Solution {
         
         return (int)sum;
     }
-    
-    
-    /* ----------------------------------- Brute Force (TLE) ---------------------------------- */
-    /*
-    public int sumSubarrayMins(int[] arr) {
-        int res = 0;
-        
-        for(int i = 0; i < arr.length; ++i) {
-            int min = arr[i];
-            for(int j = i; j < arr.length; ++j) {
-                if(min > arr[j])
-                    min = arr[j];
-                res = (res + min)%1000000007;
-            }
-        }
-        return res;
-    }
-    */
 }
