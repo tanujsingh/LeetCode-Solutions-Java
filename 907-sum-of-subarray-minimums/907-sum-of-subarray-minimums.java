@@ -1,35 +1,52 @@
+public class Pair {
+    int num;
+    int count;
+    
+    Pair(int num, int count) {
+        this.num = num;
+        this.count = count;
+    }
+}
+
 class Solution {
     public int sumSubarrayMins(int[] arr) {
-	    Deque<Integer> stack = new ArrayDeque<>();
         
-        // left bound we set of -1
-        stack.push(-1);
-        long res = 0;
-        for(int i = 0; i < arr.length; i++) {
-            while(stack.size() > 1 && arr[stack.peek()] > arr[i]) {
-                int currElemIndex = stack.pop();
-                /* Note that after the above line, stack.peek() will give us the index of left next smallest element.
-                   We monotonically order the stack always in an increasing order at all the times, because of that this
-                   argument holds true.
-                   'i' will be the next right smallest element index. (The while loop condition is designed such way).
-                */
-                res += ((long) arr[currElemIndex] * (currElemIndex - stack.peek()) * ( i - currElemIndex)) % 1000000007;
-                res = res % 1000000007;
+        int[] left = new int[arr.length];
+        int[] right = new int[arr.length];
+        
+        Stack<Pair> stackLeft = new Stack<>();
+        Stack<Pair> stackRight = new Stack<>();
+        
+        int mod = 1000000007;
+        
+        for(int i = 0; i < arr.length; ++i) {
+            int curr = arr[i];
+            int count = 1;
+            while(!stackLeft.isEmpty() && stackLeft.peek().num > curr) {
+                count += stackLeft.peek().count;
+                stackLeft.pop();
             }
-            stack.push(i);
-        }
-    
-        // right bound we set to array length;
-        int rightBoundary = arr.length;
-    
-        while(stack.size() > 1) {
-            int currElemIndex = stack.pop();
-            res += ((long) arr[currElemIndex] * (currElemIndex - stack.peek()) * (rightBoundary - currElemIndex)) % 1000000007;
-            res = res % 1000000007;
+            stackLeft.push(new Pair(curr, count));
+            left[i] = count;
         }
         
-        return (int) res;
+        for(int i =  arr.length - 1; i >= 0; --i) {
+            int curr = arr[i];
+            int count = 1;
+            while(!stackRight.isEmpty() && stackRight.peek().num >= curr) {
+                count += stackRight.peek().count;
+                stackRight.pop();
+            }
+            stackRight.push(new Pair(curr, count));
+            right[i] = count;
+        }
         
+        long sum = 0;
+        for(int i = 0; i < arr.length; ++i) {
+            sum = (sum + (long)arr[i]*left[i]*right[i])%mod;
+        }
+        
+        return (int)sum;
     }
     
     
