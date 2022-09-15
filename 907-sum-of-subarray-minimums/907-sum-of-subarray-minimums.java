@@ -14,8 +14,8 @@ class Solution {
         int[] left = new int[arr.length];
         int[] right = new int[arr.length];
         
-        Stack<Pair> stackLeft = new Stack<>();
-        Stack<Pair> stackRight = new Stack<>();
+        ArrayDeque<Pair> stackLeft = new ArrayDeque<>();
+        ArrayDeque<Pair> stackRight = new ArrayDeque<>();
         
         int mod = 1000000007;
         
