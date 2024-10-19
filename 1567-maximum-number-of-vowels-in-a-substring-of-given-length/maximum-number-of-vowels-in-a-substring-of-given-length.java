@@ -1,22 +1,13 @@
 class Solution {
     public int maxVowels(String s, int k) {
-        char[] strArr = s.toCharArray();
         List<Character> vowels = Arrays.asList('a', 'e', 'i', 'o', 'u');
         int ans = Integer.MIN_VALUE;
-        int nums = 0;
+        int count = 0;
         int left = 0;
-        for (int right = 0; right < strArr.length; ++right) {
-            if (vowels.contains(strArr[right])) {
-                nums++;
-            }
-            if (right - left + 1 > k) {
-                if (vowels.contains(strArr[left])) {
-                    nums--;
-                }
-                left++;
-            }
-
-            ans = Math.max(ans, nums);
+        for (int right = 0; right < s.length(); ++right) {
+            if (vowels.contains(s.charAt(right))) count++;
+            if (right - left + 1 > k && vowels.contains(s.charAt(left++))) count--;
+            ans = Math.max(ans, count);
         } 
         return ans;
 
