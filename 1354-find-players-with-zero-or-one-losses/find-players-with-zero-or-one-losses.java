@@ -1,25 +1,32 @@
 class Solution {
     public List<List<Integer>> findWinners(int[][] matches) {
-        Map<Integer, Integer> count = new HashMap<>();
+        int[] lossCount = new int[100001];
+        Arrays.fill(lossCount, -1);
         List<List<Integer>> ans = Arrays.asList(new ArrayList<>(), new ArrayList<>());
+
         for (int[] match : matches) {
             int winner = match[0];
             int loser = match[1];
-            count.put(winner, count.getOrDefault(winner, 0));
-            count.put(loser, count.getOrDefault(loser, 0) + 1);
-        }
-        
-        for (int player : count.keySet()) {
-            if (count.get(player) == 0) {
-                ans.get(0).add(player);
+
+            if (lossCount[winner] == -1) {
+                lossCount[winner] = 0;
+            } 
+            
+            if (lossCount[loser] == -1) {
+                lossCount[loser] = 1;
+            } else {
+                lossCount[loser]++;
             }
-            if (count.get(player) == 1) {
-                ans.get(1).add(player);
-            }
+        } 
+
+        for (int i = 0; i < 100001; ++i) {
+            if (lossCount[i] == 0) {
+                ans.get(0).add(i);
+            } else if (lossCount[i] == 1) {
+                ans.get(1).add(i);
+            } 
         }
-        
-        ans.forEach(list -> Collections.sort(list));
-        
+
         return ans;
     }
 }
