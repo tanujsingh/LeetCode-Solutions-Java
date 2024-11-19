@@ -5,9 +5,8 @@ class Solution {
         for (int num : nums) {
             map.put(num, map.getOrDefault(num, 0) + 1);
         }
-        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
-            int count = entry.getValue(); 
-            ans += count*(count - 1)/2;
+        for (int val : map.values()) {
+            ans += val*(val - 1)/2;
         }
         return ans;
     }
