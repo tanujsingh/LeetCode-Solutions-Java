@@ -5,15 +5,14 @@ class Solution {
         int maxSum = 0;
         int left = 0;
         for (int right = 0; right < nums.length; ++right) {
-            currentSum += nums[right];
-            if (set.contains(nums[right])) {
-                while (set.contains(nums[right])) {
-                    set.remove(nums[left]);
-                    currentSum -= nums[left++];
-                }
+            while (set.contains(nums[right])) {
+                set.remove(nums[left]);
+                currentSum -= nums[left++];
             }
-            maxSum = Math.max(maxSum, currentSum);
+            currentSum += nums[right];
             set.add(nums[right]);
+            maxSum = Math.max(maxSum, currentSum);
+
         }
         return maxSum;
     }
