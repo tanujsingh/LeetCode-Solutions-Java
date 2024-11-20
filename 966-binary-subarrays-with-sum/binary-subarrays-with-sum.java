@@ -3,21 +3,19 @@ class Solution {
         Map<Integer, Integer> map = new HashMap<>();
         int n = nums.length;
         int count = 0;
-        int[] prefix = new int[n];
-        prefix[0] = nums[0];
-        for (int i = 1; i < n; ++i) {
-            prefix[i] = prefix[i - 1] + nums[i];
-        }
+        int prefixSum = 0;
 
-        for (int num : prefix) {
-            if (num == goal) {
+        for (int i = 0; i < n; ++i) {
+            prefixSum += nums[i];
+            if (prefixSum == goal) {
                 count++;
             }
 
-            if (map.containsKey(num - goal)) {
-                count += map.get(num - goal);
+            if (map.containsKey(prefixSum - goal)) {
+                count += map.get(prefixSum - goal);
             }
-            map.put(num, map.getOrDefault(num, 0) + 1);
+            map.put(prefixSum, map.getOrDefault(prefixSum, 0) + 1);
+
         }
 
         return count;
