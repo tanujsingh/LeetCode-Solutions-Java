@@ -9,15 +9,15 @@ class Solution {
             prefix[i] = prefix[i - 1] + nums[i];
         }
 
-        for (int i = 0; i < n; ++i) {
-            if (prefix[i] == goal) {
+        for (int num : prefix) {
+            if (num == goal) {
                 count++;
             }
 
-            if (map.containsKey(prefix[i] - goal)) {
-                count += map.get(prefix[i] - goal);
+            if (map.containsKey(num - goal)) {
+                count += map.get(num - goal);
             }
-            map.put(prefix[i], map.getOrDefault(prefix[i], 0) + 1);
+            map.put(num, map.getOrDefault(num, 0) + 1);
         }
 
         return count;
