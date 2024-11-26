@@ -6,9 +6,10 @@ class Solution {
         if (sArr.length != pattern.length()) return false;
 
         for (int i = 0; i < pattern.length(); ++i) {
-            if (map.containsKey(pattern.charAt(i)) && !sArr[i].equals(map.get(pattern.charAt(i)))) return false;
-            if (!map.containsKey(pattern.charAt(i)) && map.containsValue(sArr[i])) return false;
-            map.put(pattern.charAt(i), sArr[i]);
+            char ch = pattern.charAt(i);
+            if (map.containsKey(ch) && !sArr[i].equals(map.get(ch))) return false;
+            if (!map.containsKey(ch) && map.containsValue(sArr[i])) return false;
+            map.put(ch, sArr[i]);
         }
         return true;
     }
