@@ -8,26 +8,23 @@ class Solution {
         }
 
         
-        char[] chars = new char[n];
-        int j = 0;
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < order.length(); ++i) {
             char ch = order.charAt(i);
-            if (map.containsKey(ch)) {
-                while (map.get(ch) > 0) {
-                    chars[j++] = ch; 
-                    map.put(ch, map.getOrDefault(ch, 0) - 1);
-                }
+            while (map.getOrDefault(ch, 0) > 0) {
+                sb.append(ch); 
+                map.put(ch, map.getOrDefault(ch, 0) - 1);
             }
         }
 
         for (Character ch : map.keySet()) {
             while (map.get(ch) > 0) {
-                chars[j++] = ch; 
+                sb.append(ch); 
                 map.put(ch, map.getOrDefault(ch, 0) - 1);
             }
         }
 
-        return new String(chars);
+        return sb.toString();
         
     }
 }
