@@ -26,8 +26,8 @@ class Solution {
             freq[word2Chars[i]]--;
         }
 
-        for (int x : freq) {
-            if (x != 0) return false;
+        for (int i = 0; i < n + 1; ++i) {
+            if (freq[i] != 0) return false;
         }
 
 
