@@ -1,28 +1,36 @@
 class Solution {
     public boolean closeStrings(String word1, String word2) {
-        Map<Character, Integer> map1 = new HashMap<>();
-        Map<Character, Integer> map2 = new HashMap<>();
-
-        if (word1.length() != word2.length()) return false;
+        int n = word1.length();
+        int m = word2.length();
+        
+        if (n != m) return false;
         if (word1.equals(word2)) return true;
+        
+        int[] word1Chars = new int[26];
+        int[] word2Chars = new int[26];
+        int[] freq = new int[n + 1];
 
         for (char ch : word1.toCharArray()) {
-            map1.put(ch, map1.getOrDefault(ch, 0) + 1);
+            word1Chars[ch - 'a']++;
         }
 
         for (char ch : word2.toCharArray()) {
-            map2.put(ch, map2.getOrDefault(ch,0) + 1);
+            word2Chars[ch - 'a']++;
         }
 
-        if (!map1.keySet().equals(map2.keySet())) return false;
+        for (int i = 0; i < 26; ++i) {
+            if ((word1Chars[i] == 0 && word2Chars[i] != 0 ) || 
+            (word1Chars[i] != 0 && word2Chars[i] == 0)) 
+            return false;
+            freq[word1Chars[i]]++;
+            freq[word2Chars[i]]--;
+        }
 
-        List<Integer> map1Freq = new ArrayList<>(map1.values());
-        List<Integer> map2Freq = new ArrayList<>(map2.values());
-        Collections.sort(map1Freq);
-        Collections.sort(map2Freq);
-
-        return map1Freq.equals(map2Freq);
+        for (int x : freq) {
+            if (x != 0) return false;
+        }
 
 
+        return true;
     }
 }
