@@ -4,6 +4,7 @@ class Solution {
         Map<Character, Integer> map2 = new HashMap<>();
 
         if (word1.length() != word2.length()) return false;
+        if (word1.equals(word2)) return true;
 
         for (char ch : word1.toCharArray()) {
             map1.put(ch, map1.getOrDefault(ch, 0) + 1);
