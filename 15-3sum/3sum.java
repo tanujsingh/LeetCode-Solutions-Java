@@ -1,27 +1,25 @@
 class Solution {
-    List<List<Integer>> res = new ArrayList<>();
     public List<List<Integer>> threeSum(int[] nums) {
-        
+        List<List<Integer>> res = new ArrayList<>();
+        int n = nums.length;
         Arrays.sort(nums);
 
-        for(int i = 0; i < nums.length && nums[i] <= 0; ++i) {
-            if(i == 0 || nums[i - 1] != nums[i]) {
-                findTwoSums(nums, i);
+        for(int i = 0; i < n - 2; ++i) {
+            if (i > 0 && nums[i - 1] == nums[i]) continue;
+            int j = i + 1;
+            int k = n - 1;
+
+            while (j < k) {
+                int localSum = nums[i] + nums[j] + nums[k];
+                if (localSum == 0) {
+                    res.add(Arrays.asList(nums[i], nums[j++], nums[k--]));
+                    while(j < k && nums[j] == nums[j - 1]) j++;
+                    while(j < k && nums[k] == nums[k + 1]) k--;
+                } else if (localSum > 0) k--;
+                else j++;
             }
         }
-
+        
         return res;
-    }
-
-    public void findTwoSums(int[] nums, int i) {
-        Set<Integer> set = new HashSet<>();
-        for (int j = i + 1; j < nums.length; ++j) {
-            int complement = - (nums[i] + nums[j]);
-            if (set.contains(complement)) {
-               res.add(Arrays.asList(nums[i], nums[j], complement));
-               while(j < nums.length - 1 && nums[j] == nums[j + 1]) j++;
-            }
-            set.add(nums[j]);
-        }
     }
 }
